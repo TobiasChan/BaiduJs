@@ -19,7 +19,61 @@ var rightIn=document.getElementById('right-in');
 var leftOut=document.getElementById('left-out');
 var rightOut=document.getElementById('right-out');
 var div=document.getElementById('container');
+var value=input.value;
 
+function renderFunc() {
+    div.innerHTML = "";
+    for (var i=0; i<data.length; i++){
+        var index=i;
+        var span=document.createElement("span");
+        var value=data[i];
+        span.innerHTML=value;
+        span.setAttribute("id",index);
+        container.appendChild(span);
+        addEvent(span,"click",deleteValue);
+    }
+}
+
+function deleteValue(){
+    var id=event.target.id;
+    data.splice(id,1);
+    renderFunc();
+}
+
+addEvent(leftIn,"click",function(){
+	var value=input.value;
+	console.log(value);
+	if (value.match(/^[0-9]+$/)){
+		data.unshift(value);
+		renderFunc();
+	}
+	else {
+		alert("请输入数字！");
+	}
+});
+
+addEvent(rightIn,"click",function(){
+	var value=input.value;
+	if (value.match(/^[0-9]+$/)){
+		data.push(value);
+		renderFunc();
+	}
+	else {
+		alert("请输入数字！");
+	}
+});
+
+addEvent(leftOut,"click",function(){
+	data.shift(value);
+	renderFunc();
+});
+
+addEvent(rightOut,"click",function(){
+	data.pop(value);
+	renderFunc();
+});
+
+/*--
 //左侧入
 function leftInFunc(){
 	var items="";
@@ -27,7 +81,6 @@ function leftInFunc(){
 		items+="<div>"+input.value+"</div>";
 		data.unshift(items);
 		div.innerHTML=data.join('');
-		return data;
 	}
 	else {
 		alert("请输入数字！");
@@ -42,7 +95,6 @@ function rightInFunc(){
 		items+="<div>"+input.value+"</div>";
 		data.push(items);
 		div.innerHTML=data.join('');
-		return data;
 	}
 	else {
 		alert("请输入数字！");
@@ -54,7 +106,6 @@ addEvent(rightIn,"click",rightInFunc);
 function leftOutFunc(){
 	data.shift(data[0]);
 	div.innerHTML=data.join('');
-	return data;
 }
 addEvent(leftOut,"click",leftOutFunc);
 
@@ -62,6 +113,6 @@ addEvent(leftOut,"click",leftOutFunc);
 function rightOutFunc(){
 	data.pop(data.lastChild);
 	div.innerHTML=data.join('');
-	return data;
 }
 addEvent(rightOut,"click",rightOutFunc);
+--*/
