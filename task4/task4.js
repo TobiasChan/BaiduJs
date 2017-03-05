@@ -21,6 +21,7 @@ var rightOut=document.getElementById('right-out');
 var div=document.getElementById('container');
 var value=input.value;
 
+//排列输入元素
 function renderFunc() {
     div.innerHTML = "";
     for (var i=0; i<data.length; i++){
@@ -34,12 +35,14 @@ function renderFunc() {
     }
 }
 
+//删除元素
 function deleteValue(){
     var id=event.target.id;
     data.splice(id,1);
     renderFunc();
 }
 
+//左侧入
 addEvent(leftIn,"click",function(){
 	var value=input.value;
 	console.log(value);
@@ -52,6 +55,7 @@ addEvent(leftIn,"click",function(){
 	}
 });
 
+//右侧入
 addEvent(rightIn,"click",function(){
 	var value=input.value;
 	if (value.match(/^[0-9]+$/)){
@@ -63,11 +67,13 @@ addEvent(rightIn,"click",function(){
 	}
 });
 
+//左侧出
 addEvent(leftOut,"click",function(){
 	data.shift(value);
 	renderFunc();
 });
 
+//右侧出
 addEvent(rightOut,"click",function(){
 	data.pop(value);
 	renderFunc();
