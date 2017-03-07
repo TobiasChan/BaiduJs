@@ -38,7 +38,7 @@ function renderFunc() {
 //删除元素
 function deleteValue(){
     var id=event.target.id;
-    data.splice(id,1);
+    data.splice(id,1); //删除点击中的数组
     renderFunc();
 }
 
