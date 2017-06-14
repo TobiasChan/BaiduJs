@@ -2,15 +2,14 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>IFE JavaScript Task 02</title>
+    <title>任务二：零基础JavaScript编码（二）</title>
   </head>
 <body>
 
   <h3>污染城市列表</h3>
   <ul id="aqi-list">
-<!--   
-    <li>第一名：福州（样例），10</li>
-      <li>第二名：福州（样例），10</li> -->
+<!--  <li>第一名：福州（样例），10</li>
+      <li>第二名：福州（样例），10</li>   -->
   </ul>
 
 <script type="text/javascript">
@@ -24,15 +23,15 @@ var aqiData = [
   ["西安", 100]
 ];
   console.log(aqiData[2][1]);
-(function () {
 
+(function () {
   /*
   在注释下方编写代码
   遍历读取aqiData中各个城市的数据
   将空气质量指数大于60的城市显示到aqi-list的列表中
   */
-  var ul=document.getElementById('aqi-list');
-  var data=new Array();
+  var ul = document.getElementById('aqi-list');
+  var data = new Array();
   for (var i=0; i<aqiData.length; i++) {
     if (aqiData[i][1] > 60) {
       data.push(aqiData[i]);
@@ -40,16 +39,17 @@ var aqiData = [
   }
   console.log(data);
 
-  function sortData(data){//令data[i][1]由大到小排列
-    data.sort(function(a,b){
-      return b[1]-a[1];
+  //令data[i][1]由大到小排列
+  function sortData(data){
+    data.sort(function(a, b){
+      return b[1] - a[1];
     })
     return data;
   }
   sortData(data);
 
    for (var i=0; i<data.length; i++) {
-      ul.innerHTML+="<li>第"+(i+1)+"名："+data[i][0]+"&nbspaqi指数："+data[i][1]+"</li><br>";
+      ul.innerHTML += "<li>第"+(i+1)+"名："+data[i][0]+"&nbspaqi指数："+data[i][1]+"</li><br>";
     }
 
   /*--

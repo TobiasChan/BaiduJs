@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>IFE JavaScript Task 01</title>
+    <title>任务一：零基础JavaScript编码（一）</title>
   </head>
 <body>
 
@@ -20,18 +20,18 @@
   在事件处理函数中
   获取aqi-input输入的值，并显示在aqi-display中
   */
-  var aqiInput=document.getElementById('aqi-input');
+  var aqiInput = document.getElementById('aqi-input');
   function addAqiDate(){
-    var aqi=aqiInput.value.trim();//"trim()"输入value两边的空格
+    var aqi = aqiInput.value.trim();//"trim()"输入value两边的空格
     if (!aqi.match(/^\d+$/)) {
       alert("空气质量必须为数字");
       return;
     }
-    document.getElementById('aqi-display').innerHTML=aqi;
+    document.getElementById('aqi-display').innerHTML = aqi;
   }
 
-  function init(){
-    document.getElementById('button').addEventListener("click",addAqiDate);
+  function init() {
+    document.getElementById('button').addEventListener("click", addAqiDate);
   }
 
   init();
