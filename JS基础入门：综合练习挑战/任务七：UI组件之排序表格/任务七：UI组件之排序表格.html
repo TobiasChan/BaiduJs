@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>任务七：UI组件之排序表格</title>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		.table {
+			margin: 20px auto auto 20px;
+			width: 800px;
+			border: 1px solid #ccc;
+			border-collapse: collapse;
+		}
+		.table .thead tr {
+			height: 50px;
+			line-height: 50px;
+			text-align: center;
+			display: flex;
+		}
+		.table .thead tr td {
+			position: relative;
+			flex: 1;
+			width: 100%;
+			font-size: 20px;
+			font-weight: 700;
+			color: #fff;
+			background: #1c3c5c;
+			border: 1px solid #ccc;
+		}
+		.table .thead tr td .upBtn {
+			position: absolute;
+			top: 5px;
+			right: 20px;
+			width: 0;
+	    	height: 0;
+	    	border-left: 7px solid transparent;
+	    	border-right: 7px solid transparent;
+	    	border-bottom: 14px solid #fff;
+	    	cursor: pointer;
+		}
+		.table .thead tr td .downBtn {
+			position: absolute;
+			bottom: 5px;
+			right: 20px;
+			width: 0;
+	    	height: 0;
+	    	border-left: 7px solid transparent;
+	    	border-right: 7px solid transparent;
+	    	border-top: 14px solid #fff;
+	    	cursor: pointer;
+		}
+		.table .tbody tr {
+			height: 50px;
+			line-height: 50px;
+			text-align: center;
+			display: flex;
+		}
+		.table .tbody tr td {
+			position: relative;
+			flex: 1;
+			width: 100%;
+			font-size: 20px;
+			color: #000;
+			border: 1px solid #ccc;
+		}
+	</style>
+</head>
+
+<body>
+  	<table class="table">
+  		<thead class="thead">
+  			<tr>
+  				<td>姓名</td>
+  				<td>语文<span class="upBtn"></span><span class="downBtn"></span></td>
+  				<td>数学<span class="upBtn"></span><span class="downBtn"></span></td>
+  				<td>英语<span class="upBtn"></span><span class="downBtn"></span></td>
+  				<td>总分<span class="upBtn"></span><span class="downBtn"></span></td>
+  			</tr>
+  		</thead>
+  		<tbody class="tbody">
+  			
+  		</tbody>
+  	</table>
+
+  	<script type="text/javascript">
+  		//事件绑定函数，兼容浏览器差异
+		function addEvent(element, event, listener) {
+		    if (element.addEventListener) {
+		        element.addEventListener(event, listener, false);
+		    } else if (element.attachEvent) {
+		        element.attachEvent("on"+event, listener);
+		    } else {
+		        element["on"+event] = listener;
+		    }
+		}
+
+  		var data = [
+  			{
+  				"name": '小明',
+  				"chinese": 95,
+  				"maths": 88,
+  				"english": 98,
+  				"total": '' 
+  			},
+  			{
+  				"name": '小新',
+  				"chinese": 59,
+  				"maths": 87,
+  				"english": 66,
+  				"total": ''
+  			},
+  			{
+  				"name": '小红',
+  				"chinese": 99,
+  				"maths": 100,
+  				"english": 98,
+  				"total": ''
+  			},
+  			{
+  				"name": 'Mike',
+  				"chinese": 75,
+  				"maths": 80,
+  				"english": 99,
+  				"total": ''
+  			}
+  		]
+
+  		//计算total值 
+  		for (let i = 0; i < data.length; i++) {
+  			data[i].total = data[i].chinese + data[i].maths + data[i].english;
+  		}
+  		
+  		//设置<tbody>标签里的内容
+  		var tbody = document.getElementsByClassName('tbody')[0];
+  		function setTbody() {
+  			for (let i = 0; i < data.length; i++) {
+  				var tr = document.createElement('tr');
+  				for (let key in data[i]) {
+  					var td = document.createElement('td');
+  					td.innerText = data[i][key];
+  					tr.appendChild(td);
+  				}
+  				tbody.appendChild(tr);
+  			}
+  		}
+  		//初始化setTbody函数
+  		setTbody();
+
+  		//升序排列函数，将data数组'key'属性数值顺序从小到大排列
+  		function upSort(key) {
+  			tbody.innerHTML = '';
+  			var byScore = function(a, b) {
+  				return a[key] - b[key];
+  			};
+  			return data.sort(byScore);
+  		}
+
+  		//降序排列函数
+  		function downSort(key) {
+  			tbody.innerHTML = '';
+  			var byScore = function(a, b) {
+  				return b[key] - a[key];
+  			};
+  			return data.sort(byScore);
+  		}
+
+  		var subject = ["chinese", "maths" , "english", "total"];
+  		//绑定升序事件按钮，以及触发升序排列函数
+  		var upBtn = document.getElementsByClassName('upBtn');
+  		for (let i = 0; i < subject.length; i++) {
+  			addEvent(upBtn[i], "click", function() {
+  				upSort(subject[i]);
+  				setTbody();
+  			});
+  		}
+  		//绑定降序事件按钮，以及触发降序排列函数
+  		var downBtn = document.getElementsByClassName('downBtn');
+  		for (let i = 0; i < subject.length; i++) {
+  			addEvent(downBtn[i], "click", function() {
+  				downSort(subject[i]);
+  				setTbody();
+  			});
+  		}
+  		
+  	</script>
+</body>
+</html>
